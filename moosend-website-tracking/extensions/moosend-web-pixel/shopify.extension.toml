@@ -5,6 +5,7 @@ type = "web_pixel_extension"
 
 # App web pixels must run in the strict sandbox.
 runtime_context = "strict"
+uid = "94b1c685-dfec-359c-12fb-a87ddafedcb96146d658"
 
 # Shopify only loads this pixel for visitors who granted BOTH analytics and
 # marketing consent and did not opt out of data sale/sharing.

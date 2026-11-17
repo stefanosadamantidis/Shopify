@@ -24,6 +24,8 @@ Note: Prisma Client auto-loads `.env`, so values in a local `.env` also apply to
 
 ## 2. Local development
 
+Prerequisite: Shopify CLI installed globally (`npm install -g @shopify/cli@latest`, then reopen the terminal). The template's `npm run dev` calls the global `shopify` command.
+
 ```bash
 cd moosend-website-tracking
 npm install

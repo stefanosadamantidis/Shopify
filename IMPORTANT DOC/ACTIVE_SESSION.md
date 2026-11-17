@@ -10,6 +10,10 @@
 - Implemented: web pixel extension, collector, ingestion, mapping, encrypted outbox + worker, orders/create fallback with dedupe, compliance webhooks, retention, embedded admin UI (home/activity/help), public privacy/support pages, mock Moosend receiver.
 - `npm run validate`: typecheck ✓, lint ✓, 83/83 tests ✓, build ✓.
 - Production smoke test (built server + mock): collector → worker → mock delivery ✓; bad HMAC → 401 ✓; auth bounce ✓.
+- All project files added to `Shopify.slnx` as solution folders (generated from disk; excludes node_modules/build/.react-router/.shopify).
+- Added `IMPORTANT DOC/HOW_TO_DEBUG.md` + helper scripts `seed:local`, `events:local`, `start:local`, `start:debug`; verified the no-Partner flow (5 simulated events → 6 Moosend events at the mock) and the debugger start (port 9229).
+- Local `.env` now holds placeholder `SHOPIFY_*` values for Mode A (CLI overrides them in `npm run dev`).
+- 2026-11-17: Dashboard "Storefront and checkout tracking" row now shows why it is inactive (`getInactiveReason` in `shop.server.ts`, `inactiveReason` in `ShopView`). Inactive = expected until Website ID + API key are saved with "Enable tracking" on. `.env` endpoint is the local mock `http://localhost:4010/track` (mock must be running; real Moosend contract still unknown). validate ✓ (83/83).
 
 ## Relevant files
 `moosend-website-tracking/shopify.app.toml`, `extensions/moosend-web-pixel/*`, `app/services/**`, `app/routes/**`, `prisma/schema.prisma`, `tests/**`.

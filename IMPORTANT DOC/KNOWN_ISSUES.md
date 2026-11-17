@@ -12,3 +12,4 @@
 | 8 | `npm audit` reports transitive vulnerabilities from template deps | OPEN | Review `npm audit`; template pins/overrides `qs`. Re-check after updating Shopify packages. |
 | 9 | `@shopify/shopify-app-react-router` v4 exists (template uses ^3) | DECISION | Kept the official template's tested version set; evaluate v4 upgrade later. |
 | 10 | `shamefully-hoist` npmrc warning with npm 12 | COSMETIC | From template `.npmrc`. |
+| 11 | Per-shop Shopify access/refresh tokens stored unencrypted in `Session` table | OPEN (VERIFIED in code) | Template default (`PrismaSessionStorage`). Mitigate with encrypted DB storage + restricted access; optionally wrap session storage with AES-GCM using `APP_ENCRYPTION_KEY`. Moosend API keys are already encrypted. |

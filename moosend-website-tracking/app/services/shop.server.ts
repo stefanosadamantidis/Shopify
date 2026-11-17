@@ -39,6 +39,19 @@ export function isTrackingActive(shop: Shop): boolean {
   );
 }
 
+/** Merchant-facing explanation of why tracking is inactive, or null when active. */
+export function getInactiveReason(shop: Shop): string | null {
+  if (shop.uninstalledAt) return "The app is uninstalled.";
+  if (!isShopConfigured(shop)) {
+    return "Enter your Moosend website ID and API key below, then click Save.";
+  }
+  if (!shop.trackingEnabled) return "Check “Enable tracking” below, then click Save.";
+  if (!isDestinationConfigured()) {
+    return "Waiting for the app operator to configure the Moosend destination.";
+  }
+  return null;
+}
+
 export function getTrackingSettings(shop: Shop): ShopTrackingSettings {
   const source = ITEM_CODE_SOURCES.includes(shop.itemCodeSource as ItemCodeSource)
     ? (shop.itemCodeSource as ItemCodeSource)
@@ -171,6 +184,7 @@ export interface ShopView {
   destinationConfigured: boolean;
   configured: boolean;
   active: boolean;
+  inactiveReason: string | null;
 }
 
 /** Browser-safe projection of the shop record (never includes secrets). */
@@ -200,5 +214,6 @@ export function toShopView(shop: Shop): ShopView {
     destinationConfigured: isDestinationConfigured(),
     configured: isShopConfigured(shop),
     active: isTrackingActive(shop),
+    inactiveReason: getInactiveReason(shop),
   };
 }

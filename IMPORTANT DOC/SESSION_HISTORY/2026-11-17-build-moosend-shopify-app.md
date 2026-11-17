@@ -35,3 +35,8 @@ typecheck PASS · lint PASS · 83/83 tests PASS · build PASS · smoke test PASS
 ## Status: IN PROGRESS
 ## Remaining work / next steps
 See ACTIVE_SESSION.md and APP_STORE_SUBMISSION.md §6–7.
+
+## Follow-up (same day)
+- Added all files to Shopify.slnx; explained architecture/auth; mapped Moosend KB 54430 events (all 5 covered; gaps: itemSupplier, newsletter-link and form identification).
+- Wrote HOW_TO_DEBUG.md and local helper scripts; verified Mode A end to end and start:debug.
+

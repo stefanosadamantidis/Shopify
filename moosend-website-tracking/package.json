@@ -22,6 +22,10 @@
     "test": "node scripts/run.mjs vitest run",
     "test:watch": "node scripts/run.mjs vitest",
     "mock:moosend": "node --experimental-strip-types scripts/mock-moosend-server.ts",
+    "seed:local": "node --env-file=.env scripts/seed-local-shop.mjs",
+    "events:local": "node scripts/send-test-events.mjs",
+    "start:local": "node --env-file=.env scripts/run.mjs react-router-serve ./build/server/index.js",
+    "start:debug": "node --env-file=.env --inspect node_modules/@react-router/serve/bin.js ./build/server/index.js",
     "validate": "npm run typecheck && npm run lint && npm run test && npm run build"
   },
   "type": "module",

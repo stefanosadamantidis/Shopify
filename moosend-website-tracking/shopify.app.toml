@@ -1,66 +1,20 @@
-# Shopify app configuration for Moosend Website Tracking (public App Store app).
-# `client_id`, `application_url` and the URLs below are written by
-# `shopify app config link`. Replace every `https://moosend-tracking.example.com`
-# with the production app URL before `shopify app deploy`.
-# Reference: https://shopify.dev/docs/apps/build/cli-for-apps/app-configuration
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = ""
-name = "Moosend Website Tracking"
-handle = "moosend-website-tracking"
-application_url = "https://moosend-tracking.example.com"
+client_id = "f5bc59638a5f508db46100149a9b578d"
+name = "moosend-website-tracking-test"
+application_url = "https://example.com"
 embedded = true
 
-[build]
-automatically_update_urls_on_dev = true
-
 [access_scopes]
-# write_pixels + read_customer_events: create/configure the app web pixel.
-# read_orders: orders/create webhook used for purchase reconciliation.
-# Learn more at https://shopify.dev/docs/apps/build/authentication-authorization/app-installation/manage-access-scopes
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
 scopes = "read_customer_events,read_orders,write_pixels"
 
 [auth]
-redirect_urls = [ "https://moosend-tracking.example.com/auth/callback" ]
+redirect_urls = [ "https://example.com/api/auth" ]
 
 [webhooks]
-api_version = "2026-10"
+api_version = "2027-01"
 
-  # Handled by: /app/routes/webhooks.app.uninstalled.tsx
-  [[webhooks.subscriptions]]
-  topics = [ "app/uninstalled" ]
-  uri = "/webhooks/app/uninstalled"
-
-  # Handled by: /app/routes/webhooks.app.scopes_update.tsx
-  [[webhooks.subscriptions]]
-  topics = [ "app/scopes_update" ]
-  uri = "/webhooks/app/scopes_update"
-
-  # Handled by: /app/routes/webhooks.orders.create.tsx
-  # include_fields limits the payload to what purchase tracking needs (data minimization).
-  [[webhooks.subscriptions]]
-  topics = [ "orders/create" ]
-  uri = "/webhooks/orders/create"
-  include_fields = [ "id", "admin_graphql_api_id", "checkout_token", "created_at", "currency", "total_price", "email", "customer", "line_items" ]
-
-  # Mandatory compliance webhooks for public apps.
-  # https://shopify.dev/docs/apps/build/compliance/privacy-law-compliance
-  [[webhooks.subscriptions]]
-  compliance_topics = [ "customers/data_request" ]
-  uri = "/webhooks/customers/data_request"
-
-  [[webhooks.subscriptions]]
-  compliance_topics = [ "customers/redact" ]
-  uri = "/webhooks/customers/redact"
-
-  [[webhooks.subscriptions]]
-  compliance_topics = [ "shop/redact" ]
-  uri = "/webhooks/shop/redact"
-
-# The web pixel sends events to the app backend from storefront and checkout
-# pages, so the backend origin must be declared.
-# https://shopify.dev/docs/apps/build/security/storefront/declare-network-access
-[network_access]
-allowed_sources = [ "https://moosend-tracking.example.com" ]
-
-[pos]
-embedded = false
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true

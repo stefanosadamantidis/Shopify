@@ -130,6 +130,7 @@ export default function Index() {
           <s-stack direction="inline" gap="base" alignItems="center">
             <StatusBadge ok={shop.active} okText="Active" notOkText="Inactive" warn />
             <s-text>Storefront and checkout tracking</s-text>
+            {shop.inactiveReason && <s-text color="subdued">{shop.inactiveReason}</s-text>}
           </s-stack>
         </s-stack>
       </s-section>

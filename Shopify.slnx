@@ -4,6 +4,7 @@
     <File Path="IMPORTANT DOC/APP_STORE_SUBMISSION.md" />
     <File Path="IMPORTANT DOC/ARCHITECTURE.md" />
     <File Path="IMPORTANT DOC/EVENT_MAPPING.md" />
+    <File Path="IMPORTANT DOC/HOW_TO_DEBUG.md" />
     <File Path="IMPORTANT DOC/INDEX.md" />
     <File Path="IMPORTANT DOC/KNOWN_ISSUES.md" />
     <File Path="IMPORTANT DOC/SETUP.md" />
@@ -129,6 +130,8 @@
     <File Path="moosend-website-tracking/scripts/crypto-warmup.cjs" />
     <File Path="moosend-website-tracking/scripts/mock-moosend-server.ts" />
     <File Path="moosend-website-tracking/scripts/run.mjs" />
+    <File Path="moosend-website-tracking/scripts/seed-local-shop.mjs" />
+    <File Path="moosend-website-tracking/scripts/send-test-events.mjs" />
   </Folder>
   <Folder Name="/moosend-website-tracking/tests/">
     <File Path="moosend-website-tracking/tests/config.test.ts" />

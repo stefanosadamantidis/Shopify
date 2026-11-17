@@ -1,0 +1,45 @@
+name = "Moosend Website Tracking"
+type = "web_pixel_extension"
+# `uid` is generated and managed by Shopify CLI. It is added to this file the
+# first time the extension is linked/deployed (`shopify app dev` / `deploy`).
+
+# App web pixels must run in the strict sandbox.
+runtime_context = "strict"
+
+# Shopify only loads this pixel for visitors who granted BOTH analytics and
+# marketing consent and did not opt out of data sale/sharing.
+# https://shopify.dev/docs/api/web-pixels-api/pixel-privacy
+[customer_privacy]
+analytics = true
+marketing = true
+preferences = false
+sale_of_data = "enabled"
+
+# Settings are written by the app via webPixelCreate / webPixelUpdate
+# (app/services/webpixel.server.ts). Only single_line_text_field is supported.
+[settings]
+type = "object"
+
+[settings.fields.collectorUrl]
+name = "Collector URL"
+description = "HTTPS endpoint of the app backend that receives events"
+type = "single_line_text_field"
+validations = [{ name = "min", value = "1" }]
+
+[settings.fields.ingestKey]
+name = "Ingest key"
+description = "Public routing key that identifies the store (not a secret)"
+type = "single_line_text_field"
+validations = [{ name = "min", value = "1" }]
+
+[settings.fields.enabled]
+name = "Enabled"
+description = "true when the merchant has connected Moosend and enabled tracking"
+type = "single_line_text_field"
+validations = [{ name = "choices", value = "[\"true\", \"false\"]" }]
+
+[settings.fields.customEvents]
+name = "Custom events"
+description = "true to send optional Moosend custom events"
+type = "single_line_text_field"
+validations = [{ name = "choices", value = "[\"true\", \"false\"]" }]

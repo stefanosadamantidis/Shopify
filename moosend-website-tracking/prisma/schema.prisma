@@ -1,0 +1,190 @@
+// Prisma schema for the Moosend Website Tracking Shopify app.
+// SQLite is used for local development and tests. For production, switch the
+// datasource provider to "postgresql" (see IMPORTANT DOC/SETUP.md).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Shopify session storage (managed by @shopify/shopify-app-session-storage-prisma).
+model Session {
+  id                  String    @id
+  shop                String
+  state               String
+  isOnline            Boolean   @default(false)
+  scope               String?
+  expires             DateTime?
+  accessToken         String
+  userId              BigInt?
+  firstName           String?
+  lastName            String?
+  email               String?
+  accountOwner        Boolean   @default(false)
+  locale              String?
+  collaborator        Boolean?  @default(false)
+  emailVerified       Boolean?  @default(false)
+  refreshToken        String?
+  refreshTokenExpires DateTime?
+}
+
+// One row per merchant store. All tenant data hangs off this record and is
+// deleted in cascade on shop/redact.
+model Shop {
+  id                          String    @id @default(cuid())
+  shopDomain                  String    @unique
+  // Public, unguessable routing key embedded in the web pixel settings.
+  // It is NOT a secret credential; it only maps storefront events to a shop.
+  ingestKey                   String    @unique
+  installedAt                 DateTime  @default(now())
+  uninstalledAt               DateTime?
+
+  trackingEnabled             Boolean   @default(false)
+  moosendWebsiteId            String?
+  // AES-256-GCM encrypted Moosend API key. Never sent to the browser.
+  moosendApiKeyEnc            String?
+  itemCodeSource              String    @default("SKU_OR_VARIANT_ID")
+  customEventsEnabled         Boolean   @default(false)
+  webhookPurchaseFallback     Boolean   @default(true)
+  checkoutAsAddToOrder        Boolean   @default(false)
+
+  webPixelId                  String?
+  pixelStatus                 String    @default("NOT_CONNECTED")
+  pixelError                  String?
+  pixelSyncedAt               DateTime?
+  // Settings last written to the web pixel; a mismatch triggers a re-sync
+  // (e.g. after the app URL changes).
+  pixelSettingsJson           String?
+
+  lastDeliveryAt              DateTime?
+  lastDeliveryError           String?
+  lastDeliveryErrorAt         DateTime?
+
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
+
+  visitors           Visitor[]
+  processedEvents    ProcessedEvent[]
+  checkoutSnapshots  CheckoutSnapshot[]
+  orders             OrderTracking[]
+  outbox             OutboxEvent[]
+  complianceRequests ComplianceRequest[]
+}
+
+// Anonymous storefront visitor keyed by Shopify's pixel clientId.
+model Visitor {
+  id            String    @id @default(cuid())
+  shopId        String
+  clientId      String
+  customerId    String?
+  emailEnc      String?
+  // Keyed HMAC of the normalized email, used for lookups (identify dedupe,
+  // customers/redact) without storing the email in plaintext.
+  emailHash     String?
+  nameEnc       String?
+  identifiedAt  DateTime?
+  // JSON array of item codes that were sent as ADDED_TO_ORDER for this visitor.
+  addedItemCodes String   @default("[]")
+  lastSeenAt    DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@unique([shopId, clientId])
+  @@index([shopId, emailHash])
+  @@index([shopId, customerId])
+  @@index([lastSeenAt])
+}
+
+// Idempotency ledger of Shopify customer event IDs already ingested.
+model ProcessedEvent {
+  shopId        String
+  sourceEventId String
+  createdAt     DateTime @default(now())
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@id([shopId, sourceEventId])
+  @@index([createdAt])
+}
+
+// Correlates a checkout token with the storefront visitor and the product
+// details (URL/image) needed by Moosend, so a webhook-sourced purchase can be
+// attributed to the visitor who consented to tracking.
+model CheckoutSnapshot {
+  shopId        String
+  checkoutToken String
+  clientId      String
+  itemsJson     String
+  updatedAt     DateTime @updatedAt
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@id([shopId, checkoutToken])
+  @@index([updatedAt])
+}
+
+// Purchase deduplication across pixel (checkout_completed) and webhook
+// (orders/create) sources.
+model OrderTracking {
+  shopId        String
+  orderId       String
+  source        String
+  status        String
+  clientId      String?
+  customerId    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@id([shopId, orderId])
+  @@index([createdAt])
+}
+
+// Transactional outbox of Moosend events awaiting delivery.
+model OutboxEvent {
+  id            String    @id @default(cuid())
+  shopId        String
+  visitorKey    String
+  eventType     String
+  // AES-256-GCM encrypted JSON payload (may contain an email address).
+  payloadEnc    String
+  status        String    @default("PENDING")
+  attempts      Int       @default(0)
+  availableAt   DateTime  @default(now())
+  lockedUntil   DateTime?
+  lastError     String?
+  lastStatus    Int?
+  orderId       String?
+  holdsSequence Boolean   @default(true)
+  deliveredAt   DateTime?
+  createdAt     DateTime  @default(now())
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@index([status, availableAt])
+  @@index([shopId, visitorKey, createdAt])
+  @@index([shopId, createdAt])
+  @@index([shopId, orderId])
+}
+
+// Record of GDPR / privacy compliance webhooks received for a shop.
+model ComplianceRequest {
+  id          String   @id @default(cuid())
+  shopId      String
+  topic       String
+  requestId   String?
+  // AES-256-GCM encrypted JSON report (customers/data_request only).
+  reportEnc   String?
+  summary     String
+  createdAt   DateTime @default(now())
+
+  shop Shop @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+  @@index([shopId, createdAt])
+}

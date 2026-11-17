@@ -1,0 +1,146 @@
+<Solution>
+  <Folder Name="/IMPORTANT DOC/">
+    <File Path="IMPORTANT DOC/ACTIVE_SESSION.md" />
+    <File Path="IMPORTANT DOC/APP_STORE_SUBMISSION.md" />
+    <File Path="IMPORTANT DOC/ARCHITECTURE.md" />
+    <File Path="IMPORTANT DOC/EVENT_MAPPING.md" />
+    <File Path="IMPORTANT DOC/INDEX.md" />
+    <File Path="IMPORTANT DOC/KNOWN_ISSUES.md" />
+    <File Path="IMPORTANT DOC/SETUP.md" />
+    <File Path="IMPORTANT DOC/SHOPIFY_COMPLIANCE.md" />
+  </Folder>
+  <Folder Name="/IMPORTANT DOC/SESSION_HISTORY/">
+    <File Path="IMPORTANT DOC/SESSION_HISTORY/2026-11-17-build-moosend-shopify-app.md" />
+    <File Path="IMPORTANT DOC/SESSION_HISTORY/INDEX.md" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/">
+    <File Path="moosend-website-tracking/.dockerignore" />
+    <File Path="moosend-website-tracking/.editorconfig" />
+    <File Path="moosend-website-tracking/.env" />
+    <File Path="moosend-website-tracking/.env.example" />
+    <File Path="moosend-website-tracking/.eslintignore" />
+    <File Path="moosend-website-tracking/.eslintrc.cjs" />
+    <File Path="moosend-website-tracking/.gitignore" />
+    <File Path="moosend-website-tracking/.graphqlrc.ts" />
+    <File Path="moosend-website-tracking/.mcp.json" />
+    <File Path="moosend-website-tracking/.npmrc" />
+    <File Path="moosend-website-tracking/.prettierignore" />
+    <File Path="moosend-website-tracking/Dockerfile" />
+    <File Path="moosend-website-tracking/env.d.ts" />
+    <File Path="moosend-website-tracking/package.json" />
+    <File Path="moosend-website-tracking/package-lock.json" />
+    <File Path="moosend-website-tracking/README.md" />
+    <File Path="moosend-website-tracking/shopify.app.toml" />
+    <File Path="moosend-website-tracking/shopify.web.toml" />
+    <File Path="moosend-website-tracking/tsconfig.json" />
+    <File Path="moosend-website-tracking/vite.config.ts" />
+    <File Path="moosend-website-tracking/vitest.config.ts" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/app/">
+    <File Path="moosend-website-tracking/app/config.server.ts" />
+    <File Path="moosend-website-tracking/app/db.server.ts" />
+    <File Path="moosend-website-tracking/app/entry.server.tsx" />
+    <File Path="moosend-website-tracking/app/globals.d.ts" />
+    <File Path="moosend-website-tracking/app/root.tsx" />
+    <File Path="moosend-website-tracking/app/routes.ts" />
+    <File Path="moosend-website-tracking/app/shopify.server.ts" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/app/lib/">
+    <File Path="moosend-website-tracking/app/lib/crypto.server.ts" />
+    <File Path="moosend-website-tracking/app/lib/logger.server.ts" />
+    <File Path="moosend-website-tracking/app/lib/rate-limit.server.ts" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/app/routes/">
+    <File Path="moosend-website-tracking/app/routes/api.pixel.events.tsx" />
+    <File Path="moosend-website-tracking/app/routes/app._index.tsx" />
+    <File Path="moosend-website-tracking/app/routes/app.activity.tsx" />
+    <File Path="moosend-website-tracking/app/routes/app.help.tsx" />
+    <File Path="moosend-website-tracking/app/routes/app.tsx" />
+    <File Path="moosend-website-tracking/app/routes/auth.$.tsx" />
+    <File Path="moosend-website-tracking/app/routes/privacy.tsx" />
+    <File Path="moosend-website-tracking/app/routes/support.tsx" />
+    <File Path="moosend-website-tracking/app/routes/webhooks.app.scopes_update.tsx" />
+    <File Path="moosend-website-tracking/app/routes/webhooks.app.uninstalled.tsx" />
+    <File Path="moosend-website-tracking/app/routes/webhooks.customers.data_request.tsx" />
+    <File Path="moosend-website-tracking/app/routes/webhooks.customers.redact.tsx" />
+    <File Path="moosend-website-tracking/app/routes/webhooks.orders.create.tsx" />
+    <File Path="moosend-website-tracking/app/routes/webhooks.shop.redact.tsx" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/app/routes/_index/">
+    <File Path="moosend-website-tracking/app/routes/_index/route.tsx" />
+    <File Path="moosend-website-tracking/app/routes/_index/styles.module.css" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/app/routes/auth.login/">
+    <File Path="moosend-website-tracking/app/routes/auth.login/error.server.tsx" />
+    <File Path="moosend-website-tracking/app/routes/auth.login/route.tsx" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/app/services/">
+    <File Path="moosend-website-tracking/app/services/dashboard.server.ts" />
+    <File Path="moosend-website-tracking/app/services/install.server.ts" />
+    <File Path="moosend-website-tracking/app/services/orders.server.ts" />
+    <File Path="moosend-website-tracking/app/services/outbox.server.ts" />
+    <File Path="moosend-website-tracking/app/services/privacy.server.ts" />
+    <File Path="moosend-website-tracking/app/services/retention.server.ts" />
+    <File Path="moosend-website-tracking/app/services/shop.server.ts" />
+    <File Path="moosend-website-tracking/app/services/webpixel.server.ts" />
+    <File Path="moosend-website-tracking/app/services/worker.server.ts" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/app/services/moosend/">
+    <File Path="moosend-website-tracking/app/services/moosend/client.server.ts" />
+    <File Path="moosend-website-tracking/app/services/moosend/mapping.ts" />
+    <File Path="moosend-website-tracking/app/services/moosend/mock-server.ts" />
+    <File Path="moosend-website-tracking/app/services/moosend/types.ts" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/app/services/pixel/">
+    <File Path="moosend-website-tracking/app/services/pixel/collector.server.ts" />
+    <File Path="moosend-website-tracking/app/services/pixel/ingest.server.ts" />
+    <File Path="moosend-website-tracking/app/services/pixel/schema.ts" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/extensions/" />
+  <Folder Name="/moosend-website-tracking/extensions/moosend-web-pixel/">
+    <File Path="moosend-website-tracking/extensions/moosend-web-pixel/package.json" />
+    <File Path="moosend-website-tracking/extensions/moosend-web-pixel/shopify.extension.toml" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/extensions/moosend-web-pixel/src/">
+    <File Path="moosend-website-tracking/extensions/moosend-web-pixel/src/index.ts" />
+    <File Path="moosend-website-tracking/extensions/moosend-web-pixel/src/tracker.ts" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/prisma/">
+    <File Path="moosend-website-tracking/prisma/dev.sqlite" />
+    <File Path="moosend-website-tracking/prisma/schema.prisma" />
+    <File Path="moosend-website-tracking/prisma/test.sqlite" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/prisma/migrations/">
+    <File Path="moosend-website-tracking/prisma/migrations/migration_lock.toml" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/prisma/migrations/20240530213853_create_session_table/">
+    <File Path="moosend-website-tracking/prisma/migrations/20240530213853_create_session_table/migration.sql" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/prisma/migrations/20261117140229_tracking_tables/">
+    <File Path="moosend-website-tracking/prisma/migrations/20261117140229_tracking_tables/migration.sql" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/prisma/migrations/20261117142752_pixel_settings_snapshot/">
+    <File Path="moosend-website-tracking/prisma/migrations/20261117142752_pixel_settings_snapshot/migration.sql" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/public/">
+    <File Path="moosend-website-tracking/public/favicon.ico" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/scripts/">
+    <File Path="moosend-website-tracking/scripts/crypto-warmup.cjs" />
+    <File Path="moosend-website-tracking/scripts/mock-moosend-server.ts" />
+    <File Path="moosend-website-tracking/scripts/run.mjs" />
+  </Folder>
+  <Folder Name="/moosend-website-tracking/tests/">
+    <File Path="moosend-website-tracking/tests/config.test.ts" />
+    <File Path="moosend-website-tracking/tests/crypto.test.ts" />
+    <File Path="moosend-website-tracking/tests/delivery.test.ts" />
+    <File Path="moosend-website-tracking/tests/global-setup.ts" />
+    <File Path="moosend-website-tracking/tests/helpers.ts" />
+    <File Path="moosend-website-tracking/tests/ingest.test.ts" />
+    <File Path="moosend-website-tracking/tests/lifecycle.test.ts" />
+    <File Path="moosend-website-tracking/tests/mapping.test.ts" />
+    <File Path="moosend-website-tracking/tests/mock-server.test.ts" />
+    <File Path="moosend-website-tracking/tests/retention.test.ts" />
+    <File Path="moosend-website-tracking/tests/web-pixel.test.ts" />
+  </Folder>
+</Solution>
